@@ -1,0 +1,336 @@
+html = r"""
+<!DOCTYPE html>
+<html lang="es">
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Botón flotante WhatsApp: acceso rápido (fixed bottom-right) -->
+    <a href="https://wa.me/5491150406191" class="btn btn-success btn-lg whatsapp" aria-label="WhatsApp">WhatsApp</a>
+
+    <!-- Footer: información de contacto y ubicación -->
+    <footer class="footer">
+      <h4>By Barrio Garage</h4>
+      <p>Villa La Florida - Quilmes Oeste</p>
+      <p>Instagram: @bybarriogarage</p>
+    </footer>
+
+  </div>
+
+  <!-- Script: validación del formulario y envío a WhatsApp -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.getElementById('fecha');
+    if (dateInput) {
+      const today = new Date();
+      const todayString = today.toISOString().slice(0, 10);
+      dateInput.min = todayString;
+
+      const oneMonth = new Date(today);
+      oneMonth.setMonth(oneMonth.getMonth() + 1);
+      dateInput.max = oneMonth.toISOString().slice(0, 10);
+    }
+
+    const form = document.getElementById('turno-form');
+    if (!form) return;
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const vehiculo = document.getElementById('vehiculo').value.trim();
+      const servicio = document.getElementById('servicio').value;
+      const fecha = document.getElementById('fecha').value;
+
+      if (!nombre || !vehiculo || !servicio || !fecha) {
+        alert('Por favor completa todos los datos del formulario.');
+        return;
+      }
+
+      const selectedDate = new Date(fecha);
+      const minDate = new Date(dateInput.min);
+      const maxDateValue = new Date(dateInput.max);
+      if (selectedDate < minDate || selectedDate > maxDateValue) {
+        alert('La fecha debe estar entre hoy y dentro de un mes.');
+        return;
+      }
+
+      const resumen = `Por favor confirma tu turno:\n\nNombre: ${nombre}\nVehículo: ${vehiculo}\nServicio: ${servicio}\nFecha: ${fecha}`;
+
+      if (confirm(resumen)) {
+        const texto = `Hola ivan%0A%0ANombre: ${encodeURIComponent(nombre)}%0AVeh%C3%ADculo: ${encodeURIComponent(vehiculo)}%0AServicio: ${encodeURIComponent(servicio)}%0AFecha: ${encodeURIComponent(fecha)}`;
+        window.location.href = `https://wa.me/5491150406191?text=${texto}`;
+      }
+    });
+  });
+  </script>
+
+  </body>
+  </html>
+
+  """
+
+
+  with open("index.html","w",encoding="utf-8") as f:
+      f.write(html)
+
+  print("Página creada")
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+z-index:9999;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Overlay principal: aplica una capa oscura sobre la imagen de fondo -->
+<div class="overlay">
+
+  <!-- Navbar: marca y navegación -->
+  <nav class="navbar navbar-dark bg-dark">
+<div class="container">
+<span class="navbar-brand mb-0 h1">
+ By Barrio Garage
+</span>
+</div>
+</nav>
+
+
+  <!-- Hero / Cabecera principal: imagen grande, título y CTA -->
+  <header class="hero">
+
+  <!-- Imagen hero (también existe como background): img/fondo.jpeg -->
+  <img src="img/fondo.jpeg" alt="Hero image">
+
+  <h1 class="display-2 fw-bold mt-4">
+  By Barrio Garage
+  </h1>
+
+  <p class="lead">
+  Lavado • Interior • Motor • Bajo Chasis
+  </p>
+
+  <!-- Botón CTA que desplaza al formulario de turno -->
+  <a href="#confirmar-turno"
+  class="btn btn-success btn-lg">
+  Reservar Turno
+  </a>
+
+  </header>
+
+<div class="container">
+
+<h2 class="section-title">
+🚗 Lavados Comunes
+</h2>
+
+<div class="row">
+
+<div class="col-md-6">
+<div class="card service-card">
+<img src="img/lavado1.jpeg">
+<div class="card-body">
+<h4>Lavado de Autos</h4>
+<p>Lavado exterior profesional.</p>
+</div>
+</div>
+</div>
+
+<!-- Tarjeta de servicio: Lavado de Autos -->
+
+<div class="col-md-6">
+<div class="card service-card">
+<img src="img/lavado2.jpeg">
+<div class="card-body">
+<h4>Lavado de Camionetas</h4>
+<p>Limpieza completa y terminación premium.</p>
+</div>
+</div>
+</div>
+
+<!-- Tarjeta de servicio: Lavado de Camionetas -->
+
+</div>
+
+<h2 class="section-title">
+🧼 Limpieza Interior
+</h2>
+
+<div class="card service-card">
+<img src="img/interior.jpeg">
+<div class="card-body">
+<h4>Limpieza Integral</h4>
+<p>Tapizados, paneles, plásticos y detalles.</p>
+</div>
+</div>
+
+<!-- Sección: Limpieza Interior -->
+
+<h2 class="section-title">
+🔧 Limpieza de Motor
+</h2>
+
+<div class="card service-card">
+<img src="img/motor.jpeg">
+<div class="card-body">
+<h4>Limpieza de Motor</h4>
+<p>Desengre y nutricion del mismo.</p>
+</div>
+</div>
+
+<!-- Sección: Limpieza de Motor -->
+
+<h2 class="section-title">
+🚙 Bajo Chasis
+</h2>
+
+<div class="card service-card">
+<img src="img/chasis1.jpeg">
+<img src="img/chasis2.jpeg">
+<div class="card-body">
+<h4>Limpieza Bajo Chasis</h4>
+<p>Remoción de barro, grasa y suciedad acumulada.</p>
+</div>
+</div>
+
+<!-- Sección: Limpieza Bajo Chasis (imágenes: chasis1, chasis2) -->
+
+<h2 class="section-title">
+💰 Precios
+</h2>
+
+<div class="price-box text-center">
+
+<!-- Bloque de Precios: muestra tarifas para Autos y Camionetas -->
+
+<div class="row">
+
+<div class="col-md-6">
+<h3>Autos</h3>
+<h1>$16.000</h1>
+</div>
+
+<div class="col-md-6">
+<h3>Camionetas</h3>
+<h1>$26.000</h1>
+</div>
+
+</div>
+
+<p class="mt-4">
+Consultar por interior, motor, pulidos y bajo chasis.
+</p>
+
+</div>
+
+<h2 class="section-title" id="confirmar-turno">
+📅 Confirmar Turno
+</h2>
+
+<div class="card service-card p-4">
+<!-- Bloque de Datos / Formulario: `id="turno-form"` -->
+<form id="turno-form">
+<div class="row g-3">
+<div class="col-md-6">
+<label class="form-label" for="nombre">Nombre</label>
+<input type="text" id="nombre" class="form-control" placeholder="Tu nombre completo" required>
+</div>
+<div class="col-md-6">
+<label class="form-label" for="vehiculo">Vehículo</label>
+<input type="text" id="vehiculo" class="form-control" placeholder="Marca y modelo" required>
+</div>
+<div class="col-md-6">
+<label class="form-label" for="servicio">Servicio</label>
+<select id="servicio" class="form-select" required>
+<option value="">Selecciona un servicio</option>
+<option>Lavado de Autos</option>
+<option>Lavado de Camionetas</option>
+<option>Limpieza Interior</option>
+<option>Limpieza de Motor</option>
+<option>Limpieza Bajo Chasis</option>
+</select>
+</div>
+<div class="col-md-6">
+<label class="form-label" for="fecha">Fecha</label>
+<input type="date" id="fecha" class="form-control" required>
+</div>
+</div>
+<div class="text-center mt-4">
+<button type="submit" class="btn btn-primary btn-lg">Confirmar Turno</button>
+</div>
+</form>
+</div>
+
+</div>
+
+<a href="https://wa.me/5491150406191"
+class="btn btn-success btn-lg whatsapp">
+WhatsApp
+</a>
+
+<footer class="footer">
+<h4>By Barrio Garage</h4>
+<p>Villa La Florida - Quilmes Oeste</p>
+<p>Instagram: @bybarriogarage</p>
+</footer>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const dateInput = document.getElementById('fecha');
+  if (dateInput) {
+    const today = new Date();
+    const todayString = today.toISOString().slice(0, 10);
+    dateInput.min = todayString;
+
+    const oneMonth = new Date(today);
+    oneMonth.setMonth(oneMonth.getMonth() + 1);
+    dateInput.max = oneMonth.toISOString().slice(0, 10);
+  }
+
+  const form = document.getElementById('turno-form');
+  if (!form) return;
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const nombre = document.getElementById('nombre').value.trim();
+    const vehiculo = document.getElementById('vehiculo').value.trim();
+    const servicio = document.getElementById('servicio').value;
+    const fecha = document.getElementById('fecha').value;
+
+    if (!nombre || !vehiculo || !servicio || !fecha) {
+      alert('Por favor completa todos los datos del formulario.');
+      return;
+    }
+
+    const selectedDate = new Date(fecha);
+    const minDate = new Date(dateInput.min);
+    const maxDateValue = new Date(dateInput.max);
+    if (selectedDate < minDate || selectedDate > maxDateValue) {
+      alert('La fecha debe estar entre hoy y dentro de un mes.');
+      return;
+    }
+
+    const resumen = `Por favor confirma tu turno:\n\nNombre: ${nombre}\nVehículo: ${vehiculo}\nServicio: ${servicio}\nFecha: ${fecha}`;
+
+    if (confirm(resumen)) {
+      const texto = `Hola ivan%0A%0ANombre: ${encodeURIComponent(nombre)}%0AVeh%C3%ADculo: ${encodeURIComponent(vehiculo)}%0AServicio: ${encodeURIComponent(servicio)}%0AFecha: ${encodeURIComponent(fecha)}`;
+      window.location.href = `https://wa.me/5491150406191?text=${texto}`;
+    }
+  });
+});
+</script>
+
+</body>
+</html>
+"""
+
+with open("index.html","w",encoding="utf-8") as f:
+    f.write(html)
+
+print("Página creada")
